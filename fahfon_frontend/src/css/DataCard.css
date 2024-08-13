@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 20%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 2px solid white;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+    position: relative;
+    background-color: #6495ED;
+    /* margin-left: 2%; */
+  }
+  
+  .data-field {
+    color: aliceblue;
+    flex-basis: 48%; /* Each data field takes 50% width of the container */
+    height: 20vh;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #89CFF0;
+    text-align: center;
+    margin: 2px 2px 2px 2px;
+  }
+
+  .device-info-field {
+    color: aliceblue;
+    margin: 4px 2px 2px 4px;
+    height: 25vh;
+    flex-basis: 100%;
+    border-radius: 10px;
+    background-color: #89CFF0;
+    box-sizing: border-box;
+  }
+
+  .empty-box {
+    color: aliceblue;
+    flex-basis: 100%;
+    background-color: #6495ED;
+  }
