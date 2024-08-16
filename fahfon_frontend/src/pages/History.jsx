@@ -46,8 +46,6 @@ const History = ()=>{
       newData.datasets[0].data = dataDictionary[display];
       setNewData(newData);
       setKey(key+1);
-      // console.log(key);
-      // console.log(data);
     }, [display])
     
     useEffect(() => {
