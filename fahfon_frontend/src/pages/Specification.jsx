@@ -6,7 +6,6 @@ const Specification = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { project } = location.state || {};
-    // console.log(project);
     const  [jsonData, setJsonData] = useState(null);
     useEffect(() => {
         if(project !== undefined)
