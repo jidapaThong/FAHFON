@@ -143,10 +143,6 @@ const Fahfon = () => {
   const fetchDataAndProcess = async () => {
     try {
       const data = await fetchData();
-      // active = 0;
-      // all = 0;
-      // data.map(rounding);
-      // device.current.value = [active, all]
       setDevices(data);
       console.log("Fetched");
     } catch (error) {
