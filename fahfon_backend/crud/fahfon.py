@@ -46,10 +46,8 @@ def insertData():
         "serial": 'S1-862798061940975'
         }
     headers = {
-    'Content-Type': 'application/x-www-form-urlencoded'  # Specify the correct content type
+    'Content-Type': 'application/x-www-form-urlencoded' 
     }
-
-    
     query = f"SELECT MAX(response_id) AS max_response_id FROM {project_name}.{database_name}.{response_table_name}"
     results = client.query(query)
     
@@ -68,7 +66,6 @@ def insertData():
             data = dict(response_json)
             insert_data = []
             for i in range(288, 0, -1):
-                #try:
                 response = data[f"Entry{i}"]
                 row = dict()
                 row["serial"] = response["serial"]
@@ -79,9 +76,7 @@ def insertData():
                 id +=1
                 row["response_id"] = id
                 insert_data.append(row)
-                #except Exception:
-                #    pass
-
+    
             df = pd.DataFrame(insert_data)
             df["localTimeOnSite"] = pd.to_datetime(df["localTimeOnSite"])
             columns = df.columns[2:]
