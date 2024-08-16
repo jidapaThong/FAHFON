@@ -1,0 +1,76 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+
+# Configure WebDriver options
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Run in headless mode for testing
+
+# Set up the WebDriver
+webdriver_service = Service('')
+driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
+
+try:
+    # Open the web application
+    driver.get("http://209.15.96.129/")
+
+    # Wait for the Fahfon component to load
+    wait = WebDriverWait(driver, 10)
+    
+    # Verify Nav component
+    nav = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'nav')))
+    assert nav.is_displayed(), "Nav component is not displayed"
+
+    # Verify MapTab component
+    map_tab = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.map-tab')))
+    assert map_tab.is_displayed(), "MapTab component is not displayed"
+
+    # Verify Map component
+    map_component = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.map')))
+    assert map_component.is_displayed(), "Map component is not displayed"
+
+    # Verify DataCard component
+    data_card = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.data-card')))
+    assert data_card.is_displayed(), "DataCard component is not displayed"
+
+    # Verify the display of data fields and device info
+    data_fields = driver.find_elements(By.CSS_SELECTOR, '.data-field')
+    assert len(data_fields) > 0, "Data fields are not displayed"
+
+    # Verify default display data
+    default_display_data = driver.find_element(By.CSS_SELECTOR, '.data-field')
+    assert default_display_data.is_displayed(), "Default display data is not displayed"
+
+    # Interact with the MapTab component
+    options = driver.find_elements(By.CSS_SELECTOR, '.map-tab-option')
+    assert len(options) > 0, "MapTab options are not displayed"
+
+    # Click on an option to change display data
+    option = options[1]  
+    option.click()
+    time.sleep(2)  # Wait for the data to update
+
+    # Verify that display data has changed
+    updated_display_data = driver.find_element(By.CSS_SELECTOR, '.data-field')
+    assert updated_display_data.is_displayed(), "Updated display data is not displayed"
+
+    # Check if devices are correctly listed
+    devices = driver.find_elements(By.CSS_SELECTOR, '.device-info-field')
+    assert len(devices) > 0, "No devices found"
+
+    # Click on a device to select it
+    device = devices[0] 
+    device.click()
+    time.sleep(2)  # Wait for the data to update
+
+    # Verify the selected device's data is shown in the DataCard
+    selected_device_data = driver.find_element(By.CSS_SELECTOR, '.data-card')
+    assert selected_device_data.is_displayed(), "Selected device data is not displayed"
+
+finally:
+    # Close the WebDriver
+    driver.quit()
