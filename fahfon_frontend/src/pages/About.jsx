@@ -1,15 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 const About = () => {
-  // Saved code for getting query parameters
-    // const location = useLocation();
-    // const queryParams = new URLSearchParams(location.search);
-    // const query = queryParams.get('device');
-
-    
-    //navigate('/history', {state: {argument1:marker[2]}});
-
-  //The page is simply for credits (for now)
   useEffect(() => {
     document.title = "About";
   }, []);
